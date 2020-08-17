@@ -1,44 +1,103 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react';
+import { withFirebase } from '../../../Firebase';
+import { TextInput, Button } from '../../reusables';
+const Login = (props) => {
+	let [state, setState] = useState({
+		email: "",
+		password: "",
+		formErrors: {
+			email: false,
+			password: false
+		},
+		isLoading: false
+	})
+	const handleChange = (value, name, valid) => {
+		setState({
+			...state, [name]: value,
+			formErrors: {
+				...state.formErrors, [name]: valid
+			}
+		})
+	}
 
-export default class Login extends Component {
-	render() {
-		return (
-			<div className="hold-transition login-page">
-				<div className="login-box">
-					<div className="login-logo">
-						<a href="#"><b>NearBy Dentists</b></a>
-					</div>
-					<div className="card">
-						<div className="card-body login-card-body">
-							<p className="login-box-msg">Sign in to start your session</p>
-			
-							<form>
-								<div className="input-group mb-3">
-									<input type="email" className="form-control" placeholder="Email" />
-									<div className="input-group-append">
-										<div className="input-group-text">
-											<span className="fas fa-envelope"></span>
-										</div>
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		let { email, password } = state;
+		props.firebase.doSignInWithEmailAndPassword(email, password).then(async (authUser) => {
+			console.log(authUser.user.uid);
+			let user = await props.firebase.auth.currentUser;
+			let authentication_Token = await user.getIdToken();
+			console.log(authentication_Token);
+		})
+			.catch((err) => {
+				console.error(err);
+			})
+	}
+
+	let disabled =
+		!state.isLoading &&
+			state.email !== "" &&
+			state.password !== "" &&
+			!state.formErrors.email &&
+			!state.formErrors.password
+			? ""
+			: "disabled";
+
+	return (
+		<div className="hold-transition login-page">
+			<div className="login-box">
+				<div className="login-logo">
+					<span><b>NearBy Dentists</b></span>
+				</div>
+				<div className="card">
+					<div className="card-body login-card-body">
+						<p className="login-box-msg">Sign in to start your session</p>
+						<form>
+							<TextInput
+								type="email"
+								name="email"
+								placeholder="Email"
+								validate={true}
+								onChange={handleChange}
+							>
+								<div className="input-group-append">
+									<div className="input-group-text">
+										<span className="fas fa-envelope"></span>
 									</div>
 								</div>
-								<div className="input-group mb-3">
-									<input type="password" className="form-control" placeholder="Password" />
-									<div className="input-group-append">
-										<div className="input-group-text">
-											<span className="fas fa-lock"></span>
-										</div>
+							</TextInput>
+							<TextInput
+								type="password"
+								name="password"
+								placeholder="Password"
+								validate={true}
+								onChange={handleChange}
+							>
+								<div className="input-group-append">
+									<div className="input-group-text">
+										<span className="fas fa-lock"></span>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-4 mx-auto">
-										<button type="submit" class="btn btn-primary btn-block">Sign In</button>
-									</div>
+							</TextInput>
+							<div className="row">
+								<div className="col-4 mx-auto">
+									<Button
+										type="submit"
+										className="btn btn-primary btn-block"
+										text="Sign In"
+										disabled={disabled}
+										onClick={handleSubmit}
+									/>
+
 								</div>
-							</form>
-						</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
-		)
-	}
+		</div>
+	)
 }
+
+export default withFirebase(Login);
+// export default Login;
