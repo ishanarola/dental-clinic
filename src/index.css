@@ -1,27 +1,10 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@media (min-width: 768px){
+  .container-login {
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+  }
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-
-/* .login-card-body .input-group .form-control,
-.register-card-body .input-group .form-control{
-  border-right:1px solid #ced4da !important;
-} */
-
-/* .input-group > .form-control:not(:last-child), .input-group > .custom-select:not(:last-child){
-  border-top-right-radius: 0.25rem !important;
-  border-bottom-right-radius: 0.25rem !important;
-} */
 
 .login-card-body .input-group .form-control.is-invalid,
 .register-card-body .input-group .form-control.is-invalid{

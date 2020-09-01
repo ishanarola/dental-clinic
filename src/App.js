@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import history from './history';
-import  {Router,Route} from 'react-router-dom';
-import {SIGN_IN} from './Components/Constants/routes';
-import {withAuthentication} from './Session';
+import { Router, Route } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
+import { withAuthentication } from './Session';
+import { Provider } from 'react-redux';
+// import postscribe from "postscribe";
+import * as ROUTE from './Components/Constants/routes';
 import Login from './Components/AuthComponents/Login';
-function App() {
+import Home from './Components/Home';
+
+// let script =
+//   '<script src="./plugins/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>' +
+//   '<script src="./plugins/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>' +
+//   '<script src="./plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js" type="text/javascript"></script>' +
+//   '<script src="./plugins/screenfull/dist/screenfull.js" type="text/javascript"></script>' +
+//   '<script src="./tempDist/js/theme.js" type="text/javascript"></script>';
+function App(props) {
+  useEffect(() => {
+    // postscribe("#root", script); 
+  })
   return (
-    <div className="App">
-      <Router history={history}>
-        <Route exact path="/" component={Login}/>
-        <Route path={SIGN_IN} component={Login}/>
-        </Router>
-    </div>
+    <Provider store={props.store}>
+      {/* <ScriptTag type="text/javascript" src="./theme.js" /> */}
+      <CookiesProvider>
+            <Router history={history}>
+              <Route exact path={ROUTE.LANDING} component={Home} />
+              <Route path={ROUTE.SIGN_IN} component={Login} />
+            </Router>
+      </CookiesProvider>
+    </Provider>
   );
 }
 
