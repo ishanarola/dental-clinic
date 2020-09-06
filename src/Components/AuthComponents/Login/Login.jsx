@@ -19,7 +19,6 @@ const Login = (props) => {
 	})
 
 	useEffect(() => {
-		console.log(context);
 		if (context !== null) {
 			props.history.push("/");
 		}
@@ -48,8 +47,10 @@ const Login = (props) => {
 					...res.data,
 					token: authentication_token
 				}
+				console.log(res);
 				if (res.status === 200) {
-					props.cookies.set('user', user, { path: '/' });
+					localStorage.setItem("user",JSON.stringify(user))
+					props.cookies.set('user', JSON.stringify(user), { path: '/' });
 					props.history.push("/")
 				}
 			})

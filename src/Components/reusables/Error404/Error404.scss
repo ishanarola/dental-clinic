@@ -1,0 +1,21 @@
+.error-box {
+    position: relative;
+    background: url(../../../assets/error-bg.jpg) center center no-repeat #fff !important;
+
+    .error-body {
+        padding-top: 0px;
+
+        h1 {
+            font-size: 100px;
+            line-height: 115px;
+        }
+    }
+
+    @media (min-width: 320px) and (max-width: 1024px) {
+        .error-body {
+            h1 {
+                font-size: 85px;
+            }
+        }
+    }
+}

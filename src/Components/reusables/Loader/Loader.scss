@@ -1,0 +1,23 @@
+// .loader {
+//   // top: calc(50% - 3.5px) !important;
+//   // right: 0 !important;
+//   position: absolute !important;
+//   top: 50%;
+//   left: 50%;
+// }
+.loaderWrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 9999;
+}
+
+.loader {
+  position: absolute !important;
+  top: calc(50% - 3.5px) !important;
+  left: 0px !important;
+  right: 0px !important;
+}

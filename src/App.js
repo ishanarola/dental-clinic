@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import history from './history';
-import { Router, Route } from 'react-router-dom';
+import { Switch, Router, Route } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 import { withAuthentication } from './Session';
 import { Provider } from 'react-redux';
@@ -23,10 +23,12 @@ function App(props) {
     <Provider store={props.store}>
       {/* <ScriptTag type="text/javascript" src="./theme.js" /> */}
       <CookiesProvider>
-            <Router history={history}>
-              <Route exact path={ROUTE.LANDING} component={Home} />
-              <Route path={ROUTE.SIGN_IN} component={Login} />
-            </Router>
+        <Router history={history}>
+          <Switch>
+            <Route path={ROUTE.LANDING} component={Home} />
+            <Route exact path={ROUTE.SIGN_IN} component={Login} />
+          </Switch>
+        </Router>
       </CookiesProvider>
     </Provider>
   );

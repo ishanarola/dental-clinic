@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-// import admLTE from '../../assets/AdminLTELogo.png';
-// import user2 from '../../assets/user2-160x160.jpg';
+import {NavLink} from 'react-router-dom';
 import * as $ from 'jquery';
+import * as routes from '../Constants/routes';
 const Sidebar = () => {
   useEffect(() => {
     $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
@@ -20,7 +20,7 @@ const Sidebar = () => {
     <ul className="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
       <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div className="sidebar-brand-icon">
-          <img src="img/logo/logo2.png" />
+          <img src="img/logo/logo2.png" alt="logo"/>
         </div>
         <div className="sidebar-brand-text mx-3">RuangAdmin</div>
       </a>
@@ -37,17 +37,13 @@ const Sidebar = () => {
       <li className="nav-item">
         <a className="nav-link collapsed" href="# " data-toggle="collapse" data-target="#collapseBootstrap" aria-expanded="true" aria-controls="collapseBootstrap">
           <i className="far fa-fw fa-window-maximize" />
-          <span>Bootstrap UI</span>
+          <span>Patients</span>
         </a>
         <div id="collapseBootstrap" className="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div className="bg-white py-2 collapse-inner rounded">
-            <h6 className="collapse-header">Bootstrap UI</h6>
-            <a className="collapse-item" href="alerts.html">Alerts</a>
-            <a className="collapse-item" href="buttons.html">Buttons</a>
-            <a className="collapse-item" href="dropdowns.html">Dropdowns</a>
-            <a className="collapse-item" href="modals.html">Modals</a>
-            <a className="collapse-item" href="popovers.html">Popovers</a>
-            <a className="collapse-item" href="progress-bar.html">Progress Bars</a>
+            <h6 className="collapse-header">Patients</h6>
+            <NavLink className="collapse-item" to={routes.PATIENTS_LIST}>Patients</NavLink>
+            <NavLink className="collapse-item" to={routes.ADD_PATIENT}>Add Patient</NavLink>
           </div>
         </div>
       </li>

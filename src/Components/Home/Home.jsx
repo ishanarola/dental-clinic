@@ -6,10 +6,8 @@ import Footer from '../WrapperComponents/Footer';
 import { withAuthorization } from '../../Session';
 import { withFirebase } from '../../Firebase';
 class Home extends Component {
-  componentDidMount = () => {
-    // this.props.firebase.doSignOut()
-  }
   render() {
+    console.log(this.props);
     return (
       <div id="page-top">
           <div id="wrapper">
@@ -27,4 +25,4 @@ class Home extends Component {
   }
 }
 const condition = authUser => !!authUser;
-export default withAuthorization(condition)(withFirebase(Home));
+export default withAuthorization(condition)(Home);
